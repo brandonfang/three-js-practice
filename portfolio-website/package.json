@@ -3,9 +3,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "start": "node --experimental-worker ./src/main.js"
   },
   "devDependencies": {
     "vite": "^2.3.7"
+  },
+  "dependencies": {
+    "three": "^0.129.0"
   }
 }

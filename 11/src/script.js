@@ -13,9 +13,21 @@ const scene = new THREE.Scene();
 
 // Texture
 const image = new Image();
-const texture = new THREE.Texture(image);
+const textureLoader = new THREE.TextureLoader();
+const texture = textureLoader.load(
+  '/textures/door/color.jpg',
+  () => {
+    console.log('loading finished');
+  },
+  () => {
+    console.log('loading progressing');
+  },
+  () => {
+    console.log('loading error');
+  }
+);
 image.addEventListener('load', () => {
-  texture.needsUpdate = true
+  texture.needsUpdate = true;
 });
 image.src = '/textures/door/color.jpg';
 

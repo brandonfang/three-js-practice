@@ -11,31 +11,35 @@ const canvas = document.querySelector('canvas.webgl');
 // Scene
 const scene = new THREE.Scene();
 
-// Texture
+// Textures
 const image = new Image();
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load(
-  '/textures/door/color.jpg',
-  () => {
-    console.log('loading finished');
-  },
-  () => {
-    console.log('loading progressing');
-  },
-  () => {
-    console.log('loading error');
-  }
-);
-image.addEventListener('load', () => {
-  texture.needsUpdate = true;
-});
-image.src = '/textures/door/color.jpg';
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onStart = () => {
+  console.log('loading started');
+};
+loadingManager.onLoad = () => {
+  console.log('loading finished');
+};
+loadingManager.onProgress = () => {
+  console.log('loading progressing');
+};
+loadingManager.onError = () => {
+  console.log('loading error');
+};
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const colorTexture = textureLoader.load('/textures/door/color.jpg');
+const alphaTexture = textureLoader.load('/textures/door/alpha.jpg');
+const heightTexture = textureLoader.load('/textures/door/height.jpg');
+const normalTexture = textureLoader.load('/textures/door/normal.jpg');
+const ambientOcclusionTexture = textureLoader.load('/textures/door/ambientOcclusion.jpg');
+const metalnessTexture = textureLoader.load('/textures/door/metalness.jpg');
+const roughnessTexture = textureLoader.load('/textures/door/roughness.jpg');
 
 /**
  * Object
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ map: texture });
+const material = new THREE.MeshBasicMaterial({ map: colorTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
@@ -65,12 +69,7 @@ window.addEventListener('resize', () => {
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(
-  75,
-  sizes.width / sizes.height,
-  0.1,
-  100
-);
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
 camera.position.x = 1;
 camera.position.y = 1;
 camera.position.z = 1;

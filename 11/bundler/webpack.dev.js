@@ -27,11 +27,7 @@ module.exports = merge(commonConfiguration, {
       const domain1 = `http${https}://${localIp}:${port}`;
       const domain2 = `http${https}://localhost:${port}`;
 
-      console.log(
-        `Project running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(
-          domain2
-        )}`
-      );
+      console.log(`Project running at:\n  - ${infoColor(domain1)}\n  - ${infoColor(domain2)}`);
     },
   },
 });

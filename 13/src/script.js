@@ -27,15 +27,41 @@ const textureLoader = new THREE.TextureLoader();
 const fontLoader = new THREE.FontLoader();
 
 fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
-  console.log('loaded');
+  const textGeometry = new THREE.TextGeometry('Hello Three.js', {
+    font: font,
+    size: 0.5,
+    height: 0.2,
+    curveSegments: 12,
+    bevelEnabled: true,
+    bevelThickness: 0.03,
+    bevelSize: 0.02,
+    bevelOffset: 0,
+    bevelSegments: 5,
+  });
+
+  textGeometry.computeBoundingBox();
+  console.log(textGeometry.boundingBox);
+
+  // textGeometry.translate(
+  //   -(textGeometry.boundingBox.max.x - 0.02) * 0.5, // Subtract bevel size
+  //   -(textGeometry.boundingBox.max.y - 0.02) * 0.5, // Subtract bevel size
+  //   -(textGeometry.boundingBox.max.z - 0.03) * 0.5 // Subtract bevel thickness
+  // );
+
+  textGeometry.center();
+
+  const matcapTexture = textureLoader.load('/textures/matcaps/1.png');
+  const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture });
+  const text = new THREE.Mesh(textGeometry, textMaterial);
+  scene.add(text);
 });
 
 /**
  * Object
  */
-const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial());
+// const cube = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial());
 
-scene.add(cube);
+// scene.add(cube);
 
 /**
  * Sizes

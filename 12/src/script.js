@@ -1,6 +1,12 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui';
+
+/**
+ * Debug
+ */
+const gui = new dat.GUI()
 
 /**
  * Base
@@ -81,6 +87,8 @@ scene.add(pointLight);
 const material = new THREE.MeshStandardMaterial();
 material.metalness = 0.45;
 material.roughness = 0.65;
+gui.add(material, 'metalness').min(0).max(1).step(0.0001);
+gui.add(material, 'roughness').min(0).max(1).step(0.0001);
 
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material);

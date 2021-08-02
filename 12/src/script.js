@@ -36,6 +36,7 @@ const scene = new THREE.Scene();
 /**
  * Objects
  */
+
 // const material = new THREE.MeshBasicMaterial();
 // material.map = doorColorTexture;
 // material.color = new THREE.Color('#ff0000');
@@ -49,8 +50,22 @@ const scene = new THREE.Scene();
 // const material = new THREE.MeshNormalMaterial();
 // material.flatShading = true;
 
-const material = new THREE.MeshMatcapMaterial();
-material.matcap = matcapTexture;
+// const material = new THREE.MeshMatcapMaterial();
+// material.matcap = matcapTexture;
+
+const material = new THREE.MeshDepthMaterial();
+
+// Lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
+scene.add(ambientLight)
+
+const pointLight = new THREE.PointLight(0xffffff, 0.5);
+pointLight.position.x = 2;
+pointLight.position.y = 3;
+pointLight.position.z = 4;
+scene.add(pointLight);
+
+
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material);
 sphere.position.x = -1.5;

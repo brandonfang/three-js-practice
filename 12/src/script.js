@@ -16,8 +16,16 @@ const doorHeightTexture = textureLoader.load('/textures/door/height.jpg')
 const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
 const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
 const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
-const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
+// const matcapTexture = textureLoader.load('/textures/matcaps/1.png')
 const gradientTexture = textureLoader.load('/textures/gradients/3.jpg')
+
+// const matcapTexture = textureLoader.load('/textures/matcaps/2.png');
+// const matcapTexture = textureLoader.load('/textures/matcaps/3.png');
+// const matcapTexture = textureLoader.load('/textures/matcaps/4.png');
+// const matcapTexture = textureLoader.load('/textures/matcaps/5.png');
+// const matcapTexture = textureLoader.load('/textures/matcaps/6.png');
+// const matcapTexture = textureLoader.load('/textures/matcaps/7.png');
+const matcapTexture = textureLoader.load('/textures/matcaps/8.png');
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl');
@@ -28,8 +36,8 @@ const scene = new THREE.Scene();
 /**
  * Objects
  */
-const material = new THREE.MeshBasicMaterial();
-material.map = doorColorTexture;
+// const material = new THREE.MeshBasicMaterial();
+// material.map = doorColorTexture;
 // material.color = new THREE.Color('#ff0000');
 // material.wireframe = true;
 // material.transparent = true;
@@ -37,6 +45,12 @@ material.map = doorColorTexture;
 // material.transparent = true;
 // material.alphaMap = doorAlphaTexture;
 // material.side = THREE.DoubleSide;
+
+// const material = new THREE.MeshNormalMaterial();
+// material.flatShading = true;
+
+const material = new THREE.MeshMatcapMaterial();
+material.matcap = matcapTexture;
 
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), material);
 sphere.position.x = -1.5;
